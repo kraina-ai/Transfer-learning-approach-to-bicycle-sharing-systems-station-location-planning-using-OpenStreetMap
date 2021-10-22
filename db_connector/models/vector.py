@@ -1,5 +1,4 @@
-
-from peewee import BooleanField, CharField, ForeignKeyField, IntegerField
+from peewee import CharField, ForeignKeyField, IntegerField
 
 from ._base_model import BaseModel
 from .area import Area
@@ -28,6 +27,3 @@ class Vector(BaseModel):
     v17 = IntegerField()
     v18 = IntegerField()
     v19 = IntegerField()
-
-class TrainVector(Vector):
-    has_station = BooleanField()

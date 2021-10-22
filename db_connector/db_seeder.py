@@ -1,7 +1,7 @@
 from .db_definition import db
-from .models import Area, TrainVector, Vector
+from .models import *
 
 
 def init_db():
     db.connect(reuse_if_open = True)
-    db.create_tables([Area, TrainVector, Vector])
+    db.create_tables([Area, Classifier, PredictionResult, TrainLabel, Vector])
