@@ -1,4 +1,4 @@
-from peewee import Field, SqliteDatabase
+from peewee import Field, PostgresqlDatabase
 
 from json import loads, dumps
 
@@ -11,4 +11,4 @@ class JSONField(Field):
     def python_value(self, value):
         return loads(value) # convert hex string to UUID
 
-db = SqliteDatabase('bike_sharing.db', field_types={'json': 'text'})
+db = PostgresqlDatabase('bike_sharing', user='admin', password='admin', host='localhost', port=5432, field_types={'json': 'text'})
