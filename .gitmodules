@@ -1,0 +1,3 @@
+[submodule "osm_data_downloader"]
+	path = osm_data_downloader
+	url = https://github.com/RaczeQ/OSM-Data-Downloader.git
