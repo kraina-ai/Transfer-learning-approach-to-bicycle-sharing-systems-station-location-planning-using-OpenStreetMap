@@ -1,7 +1,6 @@
 from typing import List
 
 import numpy as np
-from db_connector.db_definition import db as sqlite_db
 from db_connector.models.vector import Vector
 from h3 import h3
 from tqdm import tqdm

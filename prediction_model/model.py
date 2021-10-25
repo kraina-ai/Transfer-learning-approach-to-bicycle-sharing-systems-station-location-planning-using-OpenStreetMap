@@ -12,7 +12,7 @@ from db_connector.models import Classifier, Vector
 from db_connector.models.prediction_result import PredictionResult
 from tqdm import tqdm
 
-from .hex_cache import get_hex_label, load_hexes_to_cache
+from .hex_cache import get_area_embedding_data, get_hex_label, load_hexes_to_cache, save_area_embedding_data
 from .model_parameters import MODELS_CACHE_DIRECTORY
 from .neighbourhood_embedding import generate_neighbourhood_vector
 from .normalization import normalize_data
@@ -30,8 +30,11 @@ class DefaultModel(ABC):
 
     def _get_prediction_data(self, area_id: int) -> np.ndarray:
         hex_ids = [v.hex_id for v in tqdm(Vector.select().where(Vector.area == area_id), desc = f'Loading prediction hexes', disable = True)]
-        x_data = generate_neighbourhood_vector(hex_ids, "Prediction data", False)
-        x_data_normalized = normalize_data(x_data)
+        x_data_normalized = get_area_embedding_data(area_id)
+        if x_data_normalized is None:
+            x_data = generate_neighbourhood_vector(hex_ids, "Prediction data", False)
+            x_data_normalized = normalize_data(x_data)
+            save_area_embedding_data(area_id, x_data_normalized)
         return hex_ids, x_data_normalized
 
     def _save_data(self, area_id: int, prediction_hex_ids: List[str], result: np.ndarray) -> None:
