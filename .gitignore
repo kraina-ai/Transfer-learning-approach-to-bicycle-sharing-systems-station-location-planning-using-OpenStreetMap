@@ -143,3 +143,6 @@ xgboost_models/
 # OSM download cache directories
 cache/
 relation/
+
+# results directory
+csv_results/
